@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:retail_store_management_system/routes/Tables/RecentOrders.dart';
-import 'package:retail_store_management_system/routes/Tables/SalesList.dart';
+import 'package:retail_store_management_system/Tables/SalesList.dart';
 
 class Sales extends StatefulWidget {
   const Sales({Key? key}) : super(key: key);

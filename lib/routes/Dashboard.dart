@@ -12,6 +12,7 @@ class Dashboard extends StatefulWidget {
 class _Dashboard extends State<Dashboard> {
   final productName = TextEditingController();
   final price = TextEditingController();
+  final size = TextEditingController();
   TextEditingController dateinput = TextEditingController();
 
   @override
@@ -192,7 +193,7 @@ class _Dashboard extends State<Dashboard> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
-                      'New Order',
+                      'New Purchase',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: HexColor("#155293"),
@@ -276,28 +277,6 @@ class _Dashboard extends State<Dashboard> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Quantity',
-                        filled: true,
-                        fillColor: Colors.blueGrey[50],
-                        labelStyle: TextStyle(fontSize: 12),
-                        contentPadding: EdgeInsets.only(left: 15),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blueGrey.shade50),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blueGrey.shade50),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Payment',
                         filled: true,
                         fillColor: Colors.blueGrey[50],
                         labelStyle: TextStyle(fontSize: 12),
@@ -412,10 +391,82 @@ class _Dashboard extends State<Dashboard> {
               ),
             ),
             Expanded(
-              child: Container(
-                width: (MediaQuery.of(context).size.width) / 1.5,
-                height: (MediaQuery.of(context).size.height) / 2,
-                child: RecentOrders(),
+              child: Column(
+                children: [
+                  Container(
+                    width: (MediaQuery.of(context).size.width) / 1.5,
+                    height: (MediaQuery.of(context).size.height) / 2,
+                    child: RecentOrders(),
+                  ),
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, right: 600),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Stack(
+                            children: <Widget>[
+                              Positioned.fill(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: HexColor("#155293"),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.only(
+                                    top: 18,
+                                    bottom: 18,
+                                    left: 50,
+                                    right: 50,
+                                  ),
+                                  primary: Colors.white,
+                                  textStyle: TextStyle(
+                                    fontFamily: 'Cairo_SemiBold',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                child: const Text('CHECKOUT'),
+                                onPressed: () {
+                                  print(
+                                    "Name: ${productName.text} and price ${price.text}",
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: (MediaQuery.of(context).size.width) / 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 300),
+                          child: TextField(
+                            controller: price,
+                            decoration: InputDecoration(
+                              hintText: 'Price',
+                              filled: true,
+                              fillColor: Colors.blueGrey[50],
+                              labelStyle: TextStyle(fontSize: 12),
+                              contentPadding: EdgeInsets.only(left: 15),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.blueGrey.shade50),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.blueGrey.shade50),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],

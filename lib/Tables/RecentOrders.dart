@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class SalesList extends StatefulWidget {
+class RecentOrders extends StatefulWidget {
   @override
-  _SalesList createState() => _SalesList();
+  _RecentOrders createState() => _RecentOrders();
 }
 
-class _SalesList extends State<SalesList> {
+class _RecentOrders extends State<RecentOrders> {
   var _sortAscending = true;
 
   @override
@@ -19,20 +19,19 @@ class _SalesList extends State<SalesList> {
       children: <Widget>[
         Expanded(
           child: Container(
-            width: (MediaQuery.of(context).size.width),
+            width: (MediaQuery.of(context).size.width) / 1.5,
             height: (MediaQuery.of(context).size.height),
             child: PaginatedDataTable(
               showCheckboxColumn: false,
               showFirstLastButtons: true,
               sortAscending: _sortAscending,
               sortColumnIndex: 1,
-              rowsPerPage: 9,
+              rowsPerPage: 5,
               columns: [
                 DataColumn(label: Text('Product Name')),
                 DataColumn(label: Text('Price')),
                 DataColumn(label: Text('Size')),
                 DataColumn(label: Text('Quantity')),
-                DataColumn(label: Text('Payment')),
                 DataColumn(label: Text('Date')),
                 DataColumn(label: Text('Status')),
                 DataColumn(label: Text('Staff')),
@@ -52,7 +51,6 @@ class _Row {
     this.valuePrice,
     this.valueSize,
     this.valueQuantity,
-    this.valuePayment,
     this.valueDate,
     this.valueStatus,
     this.valueStaff,
@@ -62,7 +60,6 @@ class _Row {
   final String valuePrice;
   final String valueSize;
   final String valueQuantity;
-  final String valuePayment;
   final String valueDate;
   final String valueStatus;
   final String valueStaff;
@@ -101,7 +98,6 @@ class _DataSource extends DataTableSource {
         DataCell(Text(row.valuePrice)),
         DataCell(Text(row.valueSize)),
         DataCell(Text(row.valueQuantity)),
-        DataCell(Text(row.valuePayment)),
         DataCell(Text(row.valueDate)),
         DataCell(Text(row.valueStatus)),
         DataCell(Text(row.valueStaff)),
@@ -132,7 +128,6 @@ List<_Row> _paymentsList(BuildContext context) {
           '',
           '',
           '',
-          '',
         );
       },
     );
@@ -140,7 +135,6 @@ List<_Row> _paymentsList(BuildContext context) {
     //if borrowers list is empty
     return List.generate(0, (index) {
       return _Row(
-        '',
         '',
         '',
         '',

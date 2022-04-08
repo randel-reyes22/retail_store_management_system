@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class RecentOrders extends StatefulWidget {
+class SalesList extends StatefulWidget {
   @override
-  _RecentOrders createState() => _RecentOrders();
+  _SalesList createState() => _SalesList();
 }
 
-class _RecentOrders extends State<RecentOrders> {
+class _SalesList extends State<SalesList> {
   var _sortAscending = true;
 
   @override
@@ -19,23 +19,19 @@ class _RecentOrders extends State<RecentOrders> {
       children: <Widget>[
         Expanded(
           child: Container(
-            width: (MediaQuery.of(context).size.width) / 1.5,
+            width: (MediaQuery.of(context).size.width),
             height: (MediaQuery.of(context).size.height),
             child: PaginatedDataTable(
               showCheckboxColumn: false,
               showFirstLastButtons: true,
               sortAscending: _sortAscending,
               sortColumnIndex: 1,
-              rowsPerPage: 5,
+              rowsPerPage: 9,
               columns: [
-                DataColumn(label: Text('Product Name')),
-                DataColumn(label: Text('Price')),
-                DataColumn(label: Text('Size')),
-                DataColumn(label: Text('Quantity')),
-                DataColumn(label: Text('Payment')),
-                DataColumn(label: Text('Date')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Staff')),
+                DataColumn(label: Text('Sale ID')),
+                DataColumn(label: Text('Sale Date')),
+                DataColumn(label: Text('Sales Person')),
+                DataColumn(label: Text('Info')),
               ],
               source: _DataSource(context),
             ),
@@ -52,20 +48,12 @@ class _Row {
     this.valuePrice,
     this.valueSize,
     this.valueQuantity,
-    this.valuePayment,
-    this.valueDate,
-    this.valueStatus,
-    this.valueStaff,
   );
 
   final String valueProductName;
   final String valuePrice;
   final String valueSize;
-  final String valueQuantity;
-  final String valuePayment;
-  final String valueDate;
-  final String valueStatus;
-  final String valueStaff;
+  final Widget valueQuantity;
 
   bool selected = false;
 }
@@ -100,11 +88,7 @@ class _DataSource extends DataTableSource {
         DataCell(Text(row.valueProductName)),
         DataCell(Text(row.valuePrice)),
         DataCell(Text(row.valueSize)),
-        DataCell(Text(row.valueQuantity)),
-        DataCell(Text(row.valuePayment)),
-        DataCell(Text(row.valueDate)),
-        DataCell(Text(row.valueStatus)),
-        DataCell(Text(row.valueStaff)),
+        DataCell((row.valueQuantity)),
       ],
     );
   }
@@ -128,11 +112,16 @@ List<_Row> _paymentsList(BuildContext context) {
           '',
           '',
           '',
-          '',
-          '',
-          '',
-          '',
-          '',
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.blue,
+              textStyle: TextStyle(
+                fontSize: 10,
+              ),
+            ),
+            child: const Text('INFO'),
+            onPressed: () {},
+          ),
         );
       },
     );
@@ -143,11 +132,7 @@ List<_Row> _paymentsList(BuildContext context) {
         '',
         '',
         '',
-        '',
-        '',
-        '',
-        '',
-        '',
+        Text(''),
       );
     });
   }
